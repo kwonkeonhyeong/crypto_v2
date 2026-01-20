@@ -1,14 +1,35 @@
 {
-  "app": {
-    "title": "청산 기도 메타"
+  "header": {
+    "title": "크립토 기도",
+    "subtitle": "BTC의 방향을 기도하세요"
   },
   "prayer": {
-    "up": "상승",
-    "down": "하락"
+    "up": "상승 기도",
+    "down": "하락 기도",
+    "rpm": "분당 기도",
+    "total": "총 기도 수"
+  },
+  "ticker": {
+    "price": "현재가",
+    "change24h": "24시간 변동"
+  },
+  "liquidation": {
+    "long": "롱 청산",
+    "short": "숏 청산",
+    "large": "대형 청산!"
   },
   "settings": {
+    "theme": "테마",
     "sound": "사운드",
-    "darkMode": "다크 모드",
     "language": "언어"
+  },
+  "connection": {
+    "connected": "연결됨",
+    "connecting": "연결 중...",
+    "reconnecting": "재연결 중... (시도 {{attempt}})",
+    "disconnected": "연결 끊김"
+  },
+  "errors": {
+    "rateLimitExceeded": "너무 빨라요! 천천히 눌러주세요."
   }
 }
