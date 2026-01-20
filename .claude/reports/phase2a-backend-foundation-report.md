@@ -15,8 +15,9 @@
 5. [Infrastructure Layer](#5-infrastructure-layer-폴백-시스템)
 6. [패키지 구조 요약](#6-패키지-구조-요약)
 7. [테스트 전략](#7-테스트-전략)
-8. [핵심 설계 원칙](#8-핵심-설계-원칙)
-9. [다음 단계](#9-다음-단계-phase-2b)
+8. [리뷰 필수 코드](#8-리뷰-필수-코드)
+9. [핵심 설계 원칙](#9-핵심-설계-원칙)
+10. [다음 단계](#10-다음-단계-phase-2b)
 
 ---
 
@@ -946,7 +947,46 @@ class PrayerServiceTest {
 
 ---
 
-## 8. 핵심 설계 원칙
+## 8. 리뷰 필수 코드
+
+> ⚠️ 아래 코드는 **보안, 성능, 정합성** 측면에서 반드시 검토가 필요합니다.
+
+### 8.1. 동시성 처리 (성능)
+
+| 파일 | 라인 | 검토 포인트 |
+|------|------|-------------|
+| `FallbackManager.java` | :21 | `AtomicBoolean` 폴백 상태 - 경합 조건 확인 |
+| `FallbackManager.java` | :31-43 | `increment()` 폴백 전환 - 예외 발생 시 상태 전이 검증 |
+| `InMemoryPrayerCountAdapter.java` | :13-14 | `AtomicLong` 카운터 - 오버플로우 가능성 검토 |
+| `InMemoryPrayerCountAdapter.java` | :40-44 | `getAndReset()` - 원자적 읽기+초기화 정합성 |
+| `PrayerService.java` | :60-61 | `ConcurrentLinkedQueue` - 메모리 누수 가능성 |
+| `PrayerService.java` | :87-91 | `cleanOldEvents()` - 동시 수정 시 안전성 |
+
+### 8.2. 외부 시스템 호출 (성능)
+
+| 파일 | 라인 | 검토 포인트 |
+|------|------|-------------|
+| `RedisPrayerCountAdapter.java` | :30-40 | `increment()` - TTL 설정 조건 (`result == delta`) 정확성 |
+| `RedisPrayerCountAdapter.java` | :43-59 | `getCount()` - MGET 결과 null 처리 |
+| `RedisPrayerCountAdapter.java` | :73-83 | `isAvailable()` - PING 실패 시 예외 처리 |
+
+### 8.3. 에러 복구 로직 (정합성)
+
+| 파일 | 라인 | 검토 포인트 |
+|------|------|-------------|
+| `FallbackManager.java` | :72-91 | `checkAndRecover()` - 복구 중 새 요청 처리 동작 |
+| `FallbackManager.java` | :81-86 | 인메모리→Redis 병합 - 데이터 유실 가능성 |
+| `RedisPrayerCountAdapter.java` | :62-70 | `merge()` - 부분 실패 시 일관성 |
+
+### 8.4. 알려진 제한사항
+
+1. **RPM 계산기 메모리**: `RpmCalculator`의 이벤트 큐가 서버 재시작 시 초기화됨
+2. **폴백 복구 지연**: Redis 복구 후 최대 30초까지 인메모리 모드 유지 가능
+3. **TTL 설정 타이밍**: 동시 요청 시 여러 번 `expire()` 호출될 수 있음 (성능 영향 미미)
+
+---
+
+## 9. 핵심 설계 원칙
 
 | 원칙 | 적용 예시 |
 |------|----------|
@@ -959,7 +999,7 @@ class PrayerServiceTest {
 
 ---
 
-## 9. 다음 단계 (Phase 2b)
+## 10. 다음 단계 (Phase 2b)
 
 Phase 2b에서는 **WebSocket & STOMP**를 구현합니다:
 
