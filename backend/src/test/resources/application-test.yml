@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: prayer-backend-test
+  threads:
+    virtual:
+      enabled: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+server:
+  port: 0
+
+logging:
+  level:
+    root: WARN
+    com.crypto.prayer: DEBUG
+    org.springframework.web.socket: DEBUG
+    org.springframework.messaging: DEBUG
+
+# Binance WebSocket Configuration (disabled for tests)
+binance:
+  liquidation-stream-url: wss://fstream.binance.com/ws/!forceOrder@arr
+  ticker-stream-url: wss://fstream.binance.com/ws/btcusdt@ticker
+  reconnect-initial-delay-ms: 1000
+  reconnect-max-delay-ms: 30000
+  enabled: false
