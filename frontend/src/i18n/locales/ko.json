@@ -1,0 +1,14 @@
+{
+  "app": {
+    "title": "청산 기도 메타"
+  },
+  "prayer": {
+    "up": "상승",
+    "down": "하락"
+  },
+  "settings": {
+    "sound": "사운드",
+    "darkMode": "다크 모드",
+    "language": "언어"
+  }
+}

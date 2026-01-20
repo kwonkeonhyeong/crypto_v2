@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: prayer-backend
+  profiles:
+    active: local
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.crypto.prayer: DEBUG

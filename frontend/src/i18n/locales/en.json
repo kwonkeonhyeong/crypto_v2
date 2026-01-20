@@ -1,0 +1,14 @@
+{
+  "app": {
+    "title": "Crypto Prayer Meta"
+  },
+  "prayer": {
+    "up": "Up",
+    "down": "Down"
+  },
+  "settings": {
+    "sound": "Sound",
+    "darkMode": "Dark Mode",
+    "language": "Language"
+  }
+}
