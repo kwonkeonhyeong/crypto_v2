@@ -26,6 +26,7 @@ Thumbs.db
 
 # Backend
 *.jar
+!gradle-wrapper.jar
 *.class
 .gradle/
 
