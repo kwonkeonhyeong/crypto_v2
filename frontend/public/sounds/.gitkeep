@@ -1,0 +1,10 @@
+# Sound Files Directory
+
+This directory should contain the following audio files:
+
+- bgm.mp3         - Background music (2-3 min loop, 30% volume)
+- click.mp3       - Button click sound (0.1-0.2 sec, 50% volume)
+- liquidation.mp3 - Regular liquidation sound (0.3-0.5 sec, 40% volume)
+- large-liquidation.mp3 - Large liquidation sound (0.5-1 sec, 80% volume)
+
+Note: Add actual audio files before production deployment.

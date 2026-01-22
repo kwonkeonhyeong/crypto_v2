@@ -572,23 +572,23 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ## 체크리스트
 
-- [ ] 루트 디렉토리 구조 생성
-- [ ] .editorconfig 작성
-- [ ] .gitignore 작성
-- [ ] Backend Gradle 프로젝트 초기화
-  - [ ] build.gradle.kts 작성
-  - [ ] settings.gradle.kts 작성
-  - [ ] application.yml 작성
-  - [ ] PrayerApplication.java 작성
-- [ ] Frontend Vite 프로젝트 초기화
-  - [ ] package.json 작성
-  - [ ] vite.config.ts 작성
-  - [ ] tsconfig.json 작성
-  - [ ] tailwind.config.js 작성
-  - [ ] 기본 컴포넌트 작성
-- [ ] Docker Compose 파일 작성
-- [ ] Dockerfile 작성 (Backend, Frontend)
-- [ ] Git 저장소 초기화
+- [x] 루트 디렉토리 구조 생성
+- [x] .editorconfig 작성
+- [x] .gitignore 작성
+- [x] Backend Gradle 프로젝트 초기화
+  - [x] build.gradle.kts 작성
+  - [x] settings.gradle.kts 작성
+  - [x] application.yml 작성
+  - [x] PrayerApplication.java 작성
+- [x] Frontend Vite 프로젝트 초기화
+  - [x] package.json 작성
+  - [x] vite.config.ts 작성
+  - [x] tsconfig.json 작성
+  - [x] tailwind.config.js 작성
+  - [x] 기본 컴포넌트 작성
+- [x] Docker Compose 파일 작성
+- [x] Dockerfile 작성 (Backend, Frontend)
+- [x] Git 저장소 초기화
 - [ ] 로컬 개발 환경 동작 확인
   - [ ] Redis 컨테이너 실행 확인
   - [ ] Backend 실행 확인 (port 8080)

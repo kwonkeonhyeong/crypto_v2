@@ -702,29 +702,29 @@ public class AppConfig {
 
 ## 체크리스트
 
-- [ ] 도메인 모델 구현
-  - [ ] Side enum
-  - [ ] Prayer record
-  - [ ] PrayerCount record
-  - [ ] PrayerStats record
-- [ ] Application Port 정의
-  - [ ] PrayerUseCase 인터페이스
-  - [ ] PrayerQuery 인터페이스
-  - [ ] PrayerCountPort 인터페이스
-- [ ] Redis Adapter 구현
-  - [ ] RedisConfig
-  - [ ] RedisKeyGenerator
-  - [ ] RedisPrayerCountAdapter
-- [ ] 폴백 시스템 구현
-  - [ ] InMemoryPrayerCountAdapter
-  - [ ] FallbackManager (Merge 전략 포함)
-- [ ] PrayerService 구현
-  - [ ] 기도 등록 로직
-  - [ ] RPM 계산 로직 (60초 윈도우)
-- [ ] 단위 테스트 작성
-  - [ ] PrayerCount 테스트
-  - [ ] RpmCalculator 테스트
-  - [ ] FallbackManager 테스트
+- [x] 도메인 모델 구현
+  - [x] Side enum
+  - [x] Prayer record
+  - [x] PrayerCount record
+  - [x] PrayerStats record
+- [x] Application Port 정의
+  - [x] PrayerUseCase 인터페이스
+  - [x] PrayerQuery 인터페이스
+  - [x] PrayerCountPort 인터페이스
+- [x] Redis Adapter 구현
+  - [x] RedisConfig
+  - [x] RedisKeyGenerator
+  - [x] RedisPrayerCountAdapter
+- [x] 폴백 시스템 구현
+  - [x] InMemoryPrayerCountAdapter
+  - [x] FallbackManager (Merge 전략 포함)
+- [x] PrayerService 구현
+  - [x] 기도 등록 로직
+  - [x] RPM 계산 로직 (60초 윈도우)
+- [x] 단위 테스트 작성
+  - [x] PrayerCount 테스트
+  - [x] RpmCalculator 테스트
+  - [x] FallbackManager 테스트
 
 ---
 

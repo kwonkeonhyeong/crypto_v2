@@ -14,3 +14,10 @@ logging:
   level:
     root: INFO
     com.crypto.prayer: DEBUG
+
+# Binance WebSocket Configuration
+binance:
+  liquidation-stream-url: wss://fstream.binance.com/ws/!forceOrder@arr
+  ticker-stream-url: wss://fstream.binance.com/ws/btcusdt@ticker
+  reconnect-initial-delay-ms: 1000
+  reconnect-max-delay-ms: 30000

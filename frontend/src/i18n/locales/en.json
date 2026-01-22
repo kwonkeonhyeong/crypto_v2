@@ -1,14 +1,35 @@
 {
-  "app": {
-    "title": "Crypto Prayer Meta"
+  "header": {
+    "title": "Crypto Prayer",
+    "subtitle": "Pray for BTC direction"
   },
   "prayer": {
-    "up": "Up",
-    "down": "Down"
+    "up": "Pray UP",
+    "down": "Pray DOWN",
+    "rpm": "Prayers/min",
+    "total": "Total Prayers"
+  },
+  "ticker": {
+    "price": "Price",
+    "change24h": "24h Change"
+  },
+  "liquidation": {
+    "long": "Long Liquidation",
+    "short": "Short Liquidation",
+    "large": "LARGE LIQUIDATION!"
   },
   "settings": {
+    "theme": "Theme",
     "sound": "Sound",
-    "darkMode": "Dark Mode",
     "language": "Language"
+  },
+  "connection": {
+    "connected": "Connected",
+    "connecting": "Connecting...",
+    "reconnecting": "Reconnecting... (attempt {{attempt}})",
+    "disconnected": "Disconnected"
+  },
+  "errors": {
+    "rateLimitExceeded": "Too fast! Please slow down."
   }
 }

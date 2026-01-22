@@ -1,0 +1,64 @@
+version: '3.8'
+
+# 로컬 개발/테스트용 Docker Compose
+# 사용법: cd docker && docker-compose -f docker-compose.local.yml up --build
+
+services:
+  # Redis
+  redis:
+    image: redis:7.4-alpine
+    container_name: prayer-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - prayer-network
+
+  # Backend
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: prayer-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - JAVA_OPTS=-Xmx512m -Xms256m
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - prayer-network
+
+  # Frontend
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: prayer-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - prayer-network
+
+volumes:
+  redis_data:
+
+networks:
+  prayer-network:
+    driver: bridge
