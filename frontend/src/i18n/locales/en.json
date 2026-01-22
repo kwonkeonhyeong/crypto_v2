@@ -16,7 +16,21 @@
   "liquidation": {
     "long": "Long Liquidation",
     "short": "Short Liquidation",
-    "large": "LARGE LIQUIDATION!"
+    "large": "LARGE LIQUIDATION!",
+    "sidebar": {
+      "title": "Realtime Liquidations",
+      "count": "",
+      "total": "Total",
+      "empty": "Waiting for liquidation data...",
+      "showing": "Showing latest {{count}}"
+    },
+    "panel": {
+      "title": "Liquidations",
+      "count": "",
+      "latest": "Latest",
+      "realtime": "Realtime Liquidations",
+      "empty": "Waiting for liquidation data..."
+    }
   },
   "settings": {
     "theme": "Theme",

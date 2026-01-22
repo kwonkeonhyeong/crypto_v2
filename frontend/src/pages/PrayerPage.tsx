@@ -6,7 +6,7 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 import { PrayerButtonPair, ParticleContainer } from '@/components/prayer';
 import { GaugeBar, RpmIndicator } from '@/components/gauge';
 import { CounterDisplay } from '@/components/counter';
-import { LiquidationFeed } from '@/components/liquidation';
+import { LiquidationFeed, LiquidationSidebar } from '@/components/liquidation';
 import { TickerDisplay } from '@/components/ticker';
 import { ScreenShake, LargeLiquidationEffect } from '@/components/effects';
 import { MobileLayout } from '@/components/mobile';
@@ -61,7 +61,7 @@ export function PrayerPage() {
       <div
         className={`
           min-h-screen pt-20 flex flex-col items-center justify-center gap-8
-          ${isMobile ? 'pb-[33vh]' : 'pb-8'}
+          ${isMobile ? 'pb-[33vh]' : 'pb-8 pr-[360px]'}
         `}
       >
         {/* Background liquidation feed (floating items) */}
@@ -88,6 +88,9 @@ export function PrayerPage() {
         {/* Prayer buttons - only show on desktop */}
         {!isMobile && <PrayerButtonPair onPray={pray} />}
       </div>
+
+      {/* Liquidation sidebar - desktop only */}
+      {!isMobile && <LiquidationSidebar />}
     </ScreenShake>
   );
 
