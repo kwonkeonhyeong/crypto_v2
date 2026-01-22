@@ -179,7 +179,7 @@ Always write one test at a time, make it run, then improve structure. Always run
 - 다음 Phase 개발자가 컨텍스트를 빠르게 파악하도록 한다
 
 ## 파일 구조
-각 Phase 완료 시 `.claude/reports/` 폴더에 두 파일 작성:
+각 Phase 완료 시 `.claude/docs/reports/` 폴더에 두 파일 작성:
 - `{phaseX}-{phase-name}-report.md` - 작업 보고서
 - `{phaseX}-{phase-name}-diagram.md` - Mermaid 다이어그램
 
