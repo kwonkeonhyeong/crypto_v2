@@ -16,7 +16,21 @@
   "liquidation": {
     "long": "롱 청산",
     "short": "숏 청산",
-    "large": "대형 청산!"
+    "large": "대형 청산!",
+    "sidebar": {
+      "title": "실시간 청산",
+      "count": "건",
+      "total": "총",
+      "empty": "청산 데이터 대기 중...",
+      "showing": "최근 {{count}}건 표시 중"
+    },
+    "panel": {
+      "title": "청산",
+      "count": "건",
+      "latest": "최근",
+      "realtime": "실시간 청산",
+      "empty": "청산 데이터 대기 중..."
+    }
   },
   "settings": {
     "theme": "테마",

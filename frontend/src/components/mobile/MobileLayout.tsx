@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { MobilePrayerButtons } from './MobilePrayerButtons';
+import { LiquidationBottomPanel } from '@/components/liquidation';
 import type { Side } from '@/types/prayer';
 
 interface MobileLayoutProps {
@@ -24,6 +25,9 @@ export function MobileLayout({ children, onPray }: MobileLayoutProps) {
     <div className="min-h-screen flex flex-col">
       {/* Main content area - 2/3 of screen */}
       <div className="flex-1 overflow-auto pb-[33vh]">{children}</div>
+
+      {/* Liquidation bottom panel - expandable */}
+      <LiquidationBottomPanel />
 
       {/* Fixed bottom prayer buttons - 1/3 of screen */}
       <MobilePrayerButtons onPray={onPray} />

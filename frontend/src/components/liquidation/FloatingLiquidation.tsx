@@ -26,6 +26,59 @@ const COIN_ICONS: Record<string, string> = {
 
 const DEFAULT_ICON = '●';
 
+// Amount tier thresholds
+export const LIQUIDATION_TIERS = {
+  HUGE: 100_000,
+  LARGE: 50_000,
+  MEDIUM: 10_000,
+} as const;
+
+// Amount tier-based style configuration
+interface TierStyle {
+  textSize: string;
+  iconSize: string;
+  shadow: string;
+  glow: boolean;
+  bgOpacity: string;
+}
+
+function getLiquidationTierStyle(usdValue: number): TierStyle {
+  if (usdValue >= LIQUIDATION_TIERS.HUGE) {
+    return {
+      textSize: 'text-xl',
+      iconSize: 'text-3xl',
+      shadow: 'shadow-2xl',
+      glow: true,
+      bgOpacity: 'bg-black/50',
+    };
+  }
+  if (usdValue >= LIQUIDATION_TIERS.LARGE) {
+    return {
+      textSize: 'text-lg',
+      iconSize: 'text-2xl',
+      shadow: 'shadow-xl',
+      glow: false,
+      bgOpacity: 'bg-black/40',
+    };
+  }
+  if (usdValue >= LIQUIDATION_TIERS.MEDIUM) {
+    return {
+      textSize: 'text-base',
+      iconSize: 'text-2xl',
+      shadow: 'shadow-lg',
+      glow: false,
+      bgOpacity: 'bg-black/30',
+    };
+  }
+  return {
+    textSize: 'text-sm',
+    iconSize: 'text-xl',
+    shadow: 'shadow-md',
+    glow: false,
+    bgOpacity: 'bg-black/20',
+  };
+}
+
 function formatUsdValue(value: number): string {
   if (value >= 1_000_000) return `$${(value / 1_000_000).toFixed(2)}M`;
   if (value >= 1_000) return `$${(value / 1_000).toFixed(1)}K`;
@@ -40,6 +93,7 @@ export function FloatingLiquidation({
   const isLong = liquidation.side === 'LONG';
   const icon = COIN_ICONS[liquidation.symbol] || DEFAULT_ICON;
   const symbolName = liquidation.symbol.replace('USDT', '');
+  const tierStyle = getLiquidationTierStyle(liquidation.usdValue);
 
   // Random start position (from left or right side)
   const startPosition = useMemo(
@@ -98,25 +152,39 @@ export function FloatingLiquidation({
       }}
       onAnimationComplete={onComplete}
     >
-      {/* Coin icon */}
-      <span className="text-2xl">{icon}</span>
-
-      {/* Liquidation info tag */}
+      {/* Container with backdrop for better visibility */}
       <div
         className={`
-          px-3 py-1.5 rounded-full font-bold text-white text-sm
-          ${isLong ? 'bg-red-500' : 'bg-green-500'}
-          ${liquidation.isLarge ? 'text-lg shadow-lg' : ''}
+          flex items-center gap-2 px-3 py-2 rounded-xl
+          ${tierStyle.bgOpacity} backdrop-blur-sm ${tierStyle.shadow}
+          ${tierStyle.glow ? 'ring-2 ring-white/30 animate-pulse' : ''}
         `}
       >
-        <span className="opacity-75 mr-1">{isLong ? 'LONG' : 'SHORT'}</span>
-        <span>{formatUsdValue(liquidation.usdValue)}</span>
-      </div>
+        {/* Coin icon */}
+        <span className={tierStyle.iconSize}>{icon}</span>
 
-      {/* Symbol name */}
-      <span className="text-xs text-gray-400 dark:text-gray-500">
-        {symbolName}
-      </span>
+        {/* Liquidation info tag */}
+        <div
+          className={`
+            px-3 py-1.5 rounded-full font-bold text-white ${tierStyle.textSize}
+            ${isLong ? 'bg-red-500' : 'bg-green-500'}
+            ${tierStyle.glow ? 'shadow-lg shadow-current' : ''}
+          `}
+        >
+          <span className="opacity-80 mr-1.5">{isLong ? 'LONG' : 'SHORT'}</span>
+          <span>{formatUsdValue(liquidation.usdValue)}</span>
+        </div>
+
+        {/* Symbol name */}
+        <span
+          className={`
+            text-white font-medium drop-shadow-lg
+            ${tierStyle.glow ? 'text-base' : 'text-sm'}
+          `}
+        >
+          {symbolName}
+        </span>
+      </div>
     </motion.div>
   );
 }
